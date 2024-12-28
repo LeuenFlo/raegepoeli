@@ -12,8 +12,17 @@ import { ColorService } from '../../services/color.service';
   styleUrls: ['./reservation-table.component.scss']
 })
 export class ReservationTableComponent {
-  @Input() reservations: Reservation[] = [];
+  private _reservations: Reservation[] = [];
   
+  @Input() 
+  set reservations(value: Reservation[]) {
+    this._reservations = this.sortReservations(value);
+  }
+  
+  get reservations(): Reservation[] {
+    return this._reservations;
+  }
+
   displayedColumns: string[] = [
     'name',
     'personen',
@@ -59,6 +68,21 @@ export class ReservationTableComponent {
     endDate.setHours(23, 59, 59);
     
     return endDate < today;
+  }
+
+  private sortReservations(reservations: Reservation[]): Reservation[] {
+    return [...reservations].sort((a, b) => {
+      const aIsCurrent = this.isCurrentReservation(a);
+      const bIsCurrent = this.isCurrentReservation(b);
+      
+      if (aIsCurrent && !bIsCurrent) return -1;
+      if (!aIsCurrent && bIsCurrent) return 1;
+      
+      // Wenn keiner oder beide aktuell sind, nach Datum sortieren
+      const aDate = this.parseGermanDate(a.von);
+      const bDate = this.parseGermanDate(b.von);
+      return aDate.getTime() - bDate.getTime();
+    });
   }
 
   private parseGermanDate(dateStr: string): Date {

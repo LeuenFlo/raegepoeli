@@ -44,12 +44,6 @@ export class CalendarComponent implements OnChanges, OnInit {
     dayMaxEvents: true,
     eventDisplay: 'block',
     events: [],
-    eventContent: (arg: any) => {
-      const isMobile = window.innerWidth <= 576;
-      return {
-        html: isMobile ? this.formatNameMobile(arg.event.extendedProps.name) : this.formatName(arg.event.extendedProps.name)
-      };
-    },
     datesSet: (dateInfo) => {
       this.visibleDatesChange.emit({
         start: dateInfo.start,
