@@ -1,0 +1,13 @@
+<div class="card">
+  <div *ngIf="currentOccupancy; else noOccupancy">
+    <h2>Aktuelle Belegung</h2>
+    <p>
+      Heute ist das Chalet belegt von <strong>{{ currentOccupancy.name }}</strong> mit 
+      <strong>{{ currentOccupancy.anzahl }}</strong> {{ currentOccupancy.anzahl === 1 ? 'Person' : 'Personen' }}.
+    </p>
+  </div>
+  <ng-template #noOccupancy>
+    <h2>Keine aktuelle Belegung</h2>
+    <p>Das Chalet ist heute nicht belegt.</p>
+  </ng-template>
+</div> 

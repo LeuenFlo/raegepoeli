@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chalet Reservationen</title>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <link href='styles.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Chalet Reservationen</h1>
+        
+        <div class="dashboard">
+            <div class="calendar-section">
+                <h2>Kalenderübersicht</h2>
+                <div id="calendar"></div>
+            </div>
+            
+            <div class="table-section">
+                <h2>Detailübersicht</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Von</th>
+                            <th>Bis</th>
+                            <th>Name</th>
+                            <th>Personen</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservations-table">
+                        <!-- Wird durch JavaScript gefüllt -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

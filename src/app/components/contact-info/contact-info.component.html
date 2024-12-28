@@ -1,0 +1,86 @@
+<div class="contact-info">
+    
+  <div class="main-content">
+    <div class="left-column">
+      <div class="gallery card">
+        <img [src]="mainImage" alt="Chalet Hauptansicht" class="main-image">
+        <div class="gallery-grid">
+          <img *ngFor="let image of images" 
+               [src]="image" 
+               [alt]="'Chalet Ansicht'" 
+               (click)="changeMainImage(image)" 
+               [class.active]="mainImage === image">
+        </div>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="info-section prices card">
+        <h3>
+          <span class="material-icons">payments</span>
+          Preise
+        </h3>
+        <div class="price-details">
+          <div class="price-item">
+            <span class="label">Grundpreis pro Nacht</span>
+            <span class="amount">85 CHF</span>
+          </div>
+          <div class="price-item">
+            <span class="label">Pro Person pro Nacht</span>
+            <span class="amount">20 CHF</span>
+          </div>
+        </div>
+        <div class="example">
+          <span class="material-icons">calculate</span>
+          Beispiel: Eine Übernachtung mit 4 Personen kostet 165 CHF (85 CHF + 4 × 20 CHF)
+        </div>
+      </div>
+
+      <div class="info-section address card">
+        <h3>
+          <span class="material-icons">home</span>
+          Adresse
+        </h3>
+        <div class="address-details">
+          <p>
+            Wanneggweg 12<br>
+            3715 Adelboden
+          </p>
+          <a [href]="mapUrl" target="_blank" rel="noopener noreferrer" class="map-button">
+            <span class="material-icons">location_on</span>
+            Auf Google Maps anzeigen
+          </a>
+        </div>
+      </div>
+
+      <div class="info-section contact card">
+        <h3>
+          <span class="material-icons">contact_page</span>
+          Kontakt für Reservierungen
+        </h3>
+        <p class="contact-intro">Für eine Reservierungsanfrage können Sie das Online-Formular nutzen oder uns direkt kontaktieren:</p>
+        <div class="contact-methods">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdahKH-lFS5cS7J1YAjIGw9-lUYx8GvRlP5NKt1k07BTbfD0w/viewform" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="contact-button reservation-button">
+            <span class="material-icons">event_available</span>
+            Online Reservierung
+          </a>
+          <a href="mailto:xy&#64;example.com" class="contact-button">
+            <span class="material-icons">email</span>
+            xy&#64;example.com
+          </a>
+          <a href="tel:+41123456789" class="contact-button">
+            <span class="material-icons">phone</span>
+            +41 12 345 67 89
+          </a>
+          <a href="https://wa.me/41123456789" class="contact-button">
+            <span class="material-icons">chat</span>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

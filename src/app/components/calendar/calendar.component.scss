@@ -1,0 +1,148 @@
+@use "sass:color";
+
+.calendar-container {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+
+  :host ::ng-deep {
+    .fc {
+      background: white;
+      width: 100%;
+
+      .fc-toolbar {
+        margin-bottom: 1.5rem !important;
+        padding: 0 0.5rem;
+
+        .fc-button {
+          background-color: var(--color-primary);
+          border-color: var(--color-primary);
+          padding: 0.6rem 1rem;
+          font-weight: 500;
+          text-transform: capitalize;
+          border-radius: 6px;
+          
+          &:hover {
+            background-color: color.adjust(#1a73e8, $lightness: -10%);
+            border-color: color.adjust(#1a73e8, $lightness: -10%);
+          }
+
+          &:disabled {
+            background-color: #ccc;
+            border-color: #ccc;
+          }
+        }
+
+        .fc-toolbar-title {
+          font-size: 1.4rem;
+          color: var(--color-text);
+          font-weight: 500;
+        }
+      }
+
+      .fc-scrollgrid {
+        border: none !important;
+      }
+
+      .fc-col-header {
+        background: white;
+        
+        .fc-col-header-cell {
+          background: white;
+          border-bottom: 2px solid #f5f5f5;
+          padding: 1rem;
+          font-weight: 500;
+          color: #666;
+        }
+      }
+
+      .fc-daygrid-day {
+        height: auto !important;
+        padding: 8px !important;
+        background: white;
+
+        &.fc-day-today {
+          background-color: #f8f9ff !important;
+        }
+      }
+
+      .fc-daygrid-day-frame {
+        height: auto !important;
+        background: white;
+        min-height: 100px;
+      }
+
+      .fc-daygrid-day-top {
+        padding: 4px;
+        
+        .fc-daygrid-day-number {
+          font-size: 0.9rem;
+          color: #666;
+          font-weight: 500;
+        }
+      }
+
+      .fc-daygrid-day-events {
+        min-height: 2em;
+        padding: 2px;
+        
+        .fc-event {
+          height: calc(100% - 4px) !important;
+          margin: 2px 0 !important;
+        }
+      }
+
+      .fc-daygrid-event-harness {
+        height: 100% !important;
+      }
+
+      .fc-event {
+        padding: 4px 8px;
+        font-size: 0.85rem;
+        border-radius: 4px;
+        margin: 2px 0;
+        cursor: pointer;
+        border: none;
+        transition: transform 0.2s;
+        background-color: #3498db !important;
+        border-color: #2980b9 !important;
+
+        &:hover {
+          transform: translateY(-1px);
+        }
+
+        .fc-event-title {
+          font-weight: 500;
+        }
+      }
+
+      td, th {
+        border: 1px solid #f0f0f0 !important;
+      }
+
+      .fc-scrollgrid {
+        border: none !important;
+      }
+
+      // Andere Monate ausgrauen
+      .fc-day-other {
+        background-color: #fafafa;
+        .fc-daygrid-day-number {
+          opacity: 0.5;
+        }
+      }
+
+      .fc-daygrid-event {
+        background-color: #3498db !important;
+        border-color: #2980b9 !important;
+        color: white !important;
+        margin: 0 !important;
+        padding: 4px !important;
+        height: 100% !important;
+      }
+    }
+  }
+} 

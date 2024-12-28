@@ -1,0 +1,42 @@
+<div class="table-container">
+  <table mat-table [dataSource]="reservations">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let reservation">{{reservation.name}}</td>
+    </ng-container>
+
+    <!-- Personen Column -->
+    <ng-container matColumnDef="personen">
+      <th mat-header-cell *matHeaderCellDef>Pers.</th>
+      <td mat-cell *matCellDef="let reservation">{{reservation.personen}}</td>
+    </ng-container>
+
+    <!-- Von Column -->
+    <ng-container matColumnDef="von">
+      <th mat-header-cell *matHeaderCellDef>Von</th>
+      <td mat-cell *matCellDef="let reservation">{{reservation.von}}</td>
+    </ng-container>
+
+    <!-- Bis Column -->
+    <ng-container matColumnDef="bis">
+      <th mat-header-cell *matHeaderCellDef>Bis</th>
+      <td mat-cell *matCellDef="let reservation">{{reservation.bis}}</td>
+    </ng-container>
+
+    <!-- Checkout Column -->
+    <ng-container matColumnDef="checkout">
+      <th mat-header-cell *matHeaderCellDef>Checkout</th>
+      <td mat-cell *matCellDef="let reservation">{{reservation.checkout}}</td>
+    </ng-container>
+
+    <!-- Telefon Column -->
+    <ng-container matColumnDef="telefon">
+      <th mat-header-cell *matHeaderCellDef>Telefon</th>
+      <td mat-cell *matCellDef="let reservation">{{reservation.telefon}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div> 
