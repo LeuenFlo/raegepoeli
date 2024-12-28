@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./contact-info.component.scss']
 })
 export class ContactInfoComponent {
-  mapUrl = 'https://www.google.com/maps?q=Wanneggweg+12,+3715+Adelboden';
+  mapUrl = 'https://maps.app.goo.gl/WdhA4s9Uegecs6Hv6';
 } 
