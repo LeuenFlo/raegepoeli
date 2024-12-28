@@ -35,6 +35,9 @@ export class ReservationTableComponent {
   constructor(private colorService: ColorService) {}
 
   getColorForName(name: string): { background: string; border: string } {
+    if (this.isCurrentReservation(this._reservations.find(r => r.name === name)!)) {
+      return { background: '#2196F3', border: '#1976D2' };  // Blue for current reservation
+    }
     return this.colorService.getColorForName(name);
   }
 

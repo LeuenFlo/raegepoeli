@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class ColorService {
   private colors = [
     { background: '#4CAF50', border: '#388E3C' }, // Grün
-    { background: '#2196F3', border: '#1976D2' }, // Blau
     { background: '#9C27B0', border: '#7B1FA2' }, // Lila
     { background: '#FF9800', border: '#F57C00' }, // Orange
     { background: '#F44336', border: '#D32F2F' }, // Rot

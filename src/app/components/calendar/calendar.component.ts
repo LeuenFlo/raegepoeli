@@ -118,7 +118,9 @@ export class CalendarComponent implements OnChanges, OnInit {
     const events = this.reservations.map(reservation => {
       const startDate = this.parseGermanDate(reservation.von);
       const endDate = this.parseGermanDate(reservation.bis);
-      const colors = this.colorService.getColorForName(reservation.name);
+      const colors = this.isCurrentReservation(reservation) 
+        ? { background: '#2196F3', border: '#1976D2' }  // Blue color for current reservation
+        : this.colorService.getColorForName(reservation.name);
       
       if (startDate.getTime() === endDate.getTime()) {
         endDate.setDate(endDate.getDate() + 1);
@@ -140,6 +142,17 @@ export class CalendarComponent implements OnChanges, OnInit {
     });
 
     this.calendarOptions.events = events;
+  }
+
+  private isCurrentReservation(reservation: Reservation): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const startDate = this.parseGermanDate(reservation.von);
+    const endDate = this.parseGermanDate(reservation.bis);
+    endDate.setHours(23, 59, 59);
+    
+    return today >= startDate && today <= endDate;
   }
 
   private parseGermanDate(dateStr: string): Date {
