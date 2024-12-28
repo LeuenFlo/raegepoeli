@@ -27,7 +27,7 @@ export class CalendarComponent implements OnChanges, OnInit {
     initialView: 'dayGridMonth',
     locale: deLocale,
     headerToolbar: {
-      left: 'prev today next',
+      left: 'today prev,next',
       center: 'title',
       right: ''
     },
@@ -44,6 +44,20 @@ export class CalendarComponent implements OnChanges, OnInit {
     dayMaxEvents: true,
     eventDisplay: 'block',
     events: [],
+    eventClick: (info) => {
+      const name = info.event.extendedProps['name'];
+      const elementId = 'reservation-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    },
+    eventContent: (arg: any) => {
+      const isMobile = window.innerWidth <= 400;
+      return {
+        html: isMobile ? this.formatNameMobile(arg.event.extendedProps.name) : this.formatName(arg.event.extendedProps.name)
+      };
+    },
     datesSet: (dateInfo) => {
       this.visibleDatesChange.emit({
         start: dateInfo.start,

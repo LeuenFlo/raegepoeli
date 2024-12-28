@@ -49,6 +49,10 @@ export class ReservationTableComponent {
     return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   }
 
+  getReservationId(name: string): string {
+    return 'reservation-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  }
+
   isCurrentReservation(reservation: Reservation): boolean {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
