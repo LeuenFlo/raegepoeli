@@ -6,14 +6,22 @@
   margin: 0 auto;
 
   .main-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    .top-section {
+    .content-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
+      align-items: start;
+
+      .left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .right-column {
+        position: sticky;
+        top: 20px;
+      }
     }
   }
 
@@ -165,24 +173,35 @@
         background: #e9ecef;
       }
 
-      &.reservation-button {
-        background: #28a745;
-        color: white;
-
-        &:hover {
-          background: #218838;
-        }
-      }
-
       .material-icons {
         font-size: 1.1rem;
       }
     }
   }
 
+  .form-container {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 10px;
+
+    iframe {
+      display: block;
+      border: none;
+    }
+  }
+
   @media (max-width: 768px) {
-    .main-content .top-section {
+    .main-content .content-grid {
       grid-template-columns: 1fr;
+
+      .right-column {
+        position: static;
+      }
+    }
+
+    .form-container iframe {
+      width: 100% !important;
     }
   }
 } 

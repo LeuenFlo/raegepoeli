@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, catchError } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Reservation } from '../models/reservation.model';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Reservation } from '../models/reservation.model';
 })
 export class ReservationService {
   private readonly SHEET_ID = '10E31jYkhiKE_bjMnlxwVItd_X2Z6Fxs_uO6yhD_9Fxg';
-  private readonly SHEET_RANGE = 'A2:G1000';
+  private readonly SHEET_RANGE = 'A2:H1000';
   private readonly API_KEY = 'AIzaSyBhiqVypmyLHYPmqZYtvdSvxEopcLZBdYU';
 
   constructor(private http: HttpClient) {}
@@ -20,15 +21,18 @@ export class ReservationService {
       map(response => {
         if (!response.values) return [];
         
-        return response.values.map((row: string[]) => ({
-          timestamp: this.parseGermanDateTime(row[0]),
-          name: row[1],
-          personen: parseInt(row[2]),
-          von: row[3],
-          bis: row[4],
-          checkout: this.formatCheckoutTime(row[5]),
-          telefon: row[6]
-        }));
+        return response.values
+          .filter((row: string[]) => row[7]?.toLowerCase() === 'ja')
+          .map((row: string[]) => ({
+            timestamp: this.parseGermanDateTime(row[0]),
+            name: row[1],
+            personen: parseInt(row[2]),
+            von: row[3],
+            bis: row[4],
+            checkout: this.formatCheckoutTime(row[5]),
+            telefon: row[6],
+            status: 'bestätigt'
+          }));
       }),
       catchError(error => {
         console.error('Fehler beim Laden der Reservierungen:', error);
@@ -61,7 +65,6 @@ export class ReservationService {
           const vonDate = this.parseGermanDate(reservation.von);
           const bisDate = this.parseGermanDate(reservation.bis);
           
-          // Überprüfe, ob die Reservierung im sichtbaren Bereich liegt
           return (vonDate <= end && bisDate >= start);
         });
       })
