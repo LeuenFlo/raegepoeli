@@ -145,4 +145,77 @@
       }
     }
   }
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 1rem;
+
+    :host ::ng-deep {
+      .fc {
+        .fc-toolbar {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 1rem !important;
+          
+          .fc-toolbar-title {
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 0;
+          }
+
+          .fc-toolbar-chunk {
+            display: flex;
+            gap: 0.25rem;
+            width: 100%;
+            justify-content: center;
+
+            &:first-child {
+              order: 2;
+            }
+
+            &:nth-child(2) {
+              order: 1;
+            }
+
+            &:last-child {
+              display: none;
+            }
+          }
+
+          .fc-button-group {
+            display: flex;
+            gap: 0.25rem;
+          }
+
+          .fc-button {
+            padding: 0.35rem;
+            font-size: 0.85rem;
+            height: 32px;
+            min-width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.fc-prev-button,
+            &.fc-next-button {
+              padding: 0;
+              width: 32px;
+            }
+          }
+        }
+
+        .fc-col-header-cell {
+          padding: 0.5rem !important;
+          font-size: 0.85rem;
+        }
+
+        .fc-daygrid-day {
+          padding: 4px !important;
+        }
+      }
+    }
+  }
 } 

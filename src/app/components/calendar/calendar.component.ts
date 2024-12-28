@@ -15,18 +15,16 @@ import { Reservation } from '../../models/reservation.model';
 export class CalendarComponent implements OnChanges {
   @Input() reservations: Reservation[] = [];
   @Output() visibleDatesChange = new EventEmitter<{ start: Date; end: Date }>();
+  currentMonthYear: string = '';
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin],
     initialView: 'dayGridMonth',
     locale: 'de',
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'prev,next',
       center: 'title',
       right: ''
-    },
-    buttonText: {
-      today: 'heute'
     },
     events: [],
     eventContent: (arg: any) => {
@@ -39,6 +37,9 @@ export class CalendarComponent implements OnChanges {
         start: dateInfo.start,
         end: dateInfo.end
       });
+      const firstVisibleDate = new Date(dateInfo.start);
+      firstVisibleDate.setDate(1);
+      this.updateCurrentMonth(firstVisibleDate);
     }
   };
 
@@ -53,7 +54,6 @@ export class CalendarComponent implements OnChanges {
       const startDate = this.parseGermanDate(reservation.von);
       const endDate = this.parseGermanDate(reservation.bis);
       
-      // Wenn Start- und Enddatum gleich sind, setze das Ende auf den nächsten Tag
       if (startDate.getTime() === endDate.getTime()) {
         endDate.setDate(endDate.getDate() + 1);
       } else {
@@ -77,5 +77,13 @@ export class CalendarComponent implements OnChanges {
   private parseGermanDate(dateStr: string): Date {
     const [day, month, year] = dateStr.split('.').map(num => parseInt(num));
     return new Date(2000 + year, month - 1, day);
+  }
+
+  private updateCurrentMonth(date: Date) {
+    const monthNames = [
+      'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+      'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'
+    ];
+    this.currentMonthYear = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
   }
 } 

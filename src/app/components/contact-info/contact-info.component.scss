@@ -32,8 +32,9 @@
   .gallery {
     .main-image {
       width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
+      height: auto;
+      max-height: 80vh;
+      object-fit: contain;
       border-radius: 8px;
       margin-bottom: 1.5rem;
       transition: all 0.3s ease;
@@ -177,7 +178,9 @@
 
     .gallery {
       .main-image {
-        aspect-ratio: 16/9;
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
       }
 
       .gallery-grid {
@@ -194,7 +197,14 @@
   @media (max-width: 768px) {
     .gallery {
       .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)) !important;
+        gap: 5px !important;
+        
+        img {
+          height: 50px !important;
+          width: 50px !important;
+          object-fit: cover;
+        }
       }
     }
   }
