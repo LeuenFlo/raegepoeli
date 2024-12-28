@@ -33,6 +33,8 @@ export class CalendarComponent implements OnChanges, OnInit {
     height: 'auto',
     contentHeight: 'auto',
     expandRows: true,
+    fixedWeekCount: false,
+    showNonCurrentDates: false,
     events: [],
     eventContent: (arg: any) => {
       return {
@@ -113,8 +115,13 @@ export class CalendarComponent implements OnChanges, OnInit {
   }
 
   private parseGermanDate(dateStr: string): Date {
-    const [day, month, year] = dateStr.split('.').map(num => parseInt(num));
-    return new Date(2000 + year, month - 1, day);
+    try {
+      const [day, month, year] = dateStr.split('.').map(num => parseInt(num));
+      return new Date(year, month - 1, day);
+    } catch (error) {
+      console.error('Fehler beim Parsen des Datums:', dateStr, error);
+      return new Date();
+    }
   }
 
   private updateCurrentMonth(date: Date) {

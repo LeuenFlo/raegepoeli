@@ -5,6 +5,8 @@ import { ReservationTableComponent } from '../../components/reservation-table/re
 import { CurrentOccupancyComponent } from '../../components/current-occupancy/current-occupancy.component';
 import { Reservation } from '../../models/reservation.model';
 import { ReservationService } from '../../services/reservation.service';
+import { catchError, finalize } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 interface DateRange {
   start: Date;
@@ -25,6 +27,8 @@ interface DateRange {
 })
 export class HomeComponent {
   reservations: Reservation[] = [];
+  isLoading = false;
+  error: string | null = null;
 
   constructor(private reservationService: ReservationService) {
     this.loadInitialReservations();
@@ -42,7 +46,20 @@ export class HomeComponent {
   }
 
   private loadReservationsForDateRange(start: Date, end: Date) {
+    this.isLoading = true;
+    this.error = null;
+
     this.reservationService.getReservationsForDateRange(start, end)
+      .pipe(
+        catchError(error => {
+          console.error('Fehler beim Laden der Reservierungen:', error);
+          this.error = 'Die Reservierungen konnten nicht geladen werden. Bitte versuchen Sie es später erneut.';
+          return of([]);
+        }),
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
       .subscribe(reservations => {
         this.reservations = reservations;
       });

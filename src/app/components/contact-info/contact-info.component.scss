@@ -1,211 +1,188 @@
+@import '../../../styles/variables';
+
 .contact-info {
-  max-width: 1600px;
+  padding: 20px;
+  max-width: $max-content-width;
   margin: 0 auto;
-  padding: 2rem 2rem;
 
   .main-content {
-    display: grid;
-    grid-template-columns: 60% 40%;
-    gap: 2rem;
-    align-items: start;
-  }
-
-  .left-column, .right-column {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 20px;
+
+    .top-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
   }
 
   .card {
     background: white;
     border-radius: 8px;
-    padding: 1.75rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-
-    p {
-      color: #666;
-      margin-bottom: 1rem;
-    }
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
   }
 
-  // Gallery
-  .gallery {
-    .main-image {
-      width: 100%;
-      height: auto;
-      max-height: 80vh;
-      object-fit: contain;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1rem;
-      
-      img {
-        width: 100%;
-        aspect-ratio: 4/3;
-        object-fit: cover;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        border: 2px solid transparent;
-
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        &.active {
-          border-color: var(--color-primary);
-        }
-      }
-    }
-  }
-
-  // Info sections
   .info-section {
     h3 {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-      
+      gap: 8px;
+      margin-bottom: 16px;
+      color: #333;
+      font-size: 1.2rem;
+
       .material-icons {
-        color: var(--color-primary);
+        color: #007bff;
       }
     }
   }
 
-  // Prices
-  .price-item {
+  .price-details {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 0.75rem;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+
+      .label {
+        color: #666;
+      }
+
+      .amount {
+        font-weight: bold;
+        color: #333;
+      }
+    }
   }
 
   .example {
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-top: 0.75rem;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-  }
-
-  // Address
-  .address-details {
-    margin: 1rem 0;
+    gap: 8px;
+    padding: 12px;
     background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 8px;
-    
-    div {
-      margin-bottom: 0.5rem;
-      color: #333;
-      
-      &:last-child {
-        margin-bottom: 0;
-      }
+    border-radius: 4px;
+    color: #666;
+    font-size: 0.9rem;
+
+    .material-icons {
+      color: #007bff;
+      font-size: 1.1rem;
     }
   }
 
-  // Contact
-  .contact-methods {
+  .address-details {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 20px;
 
-    .reservation-button {
-      background: var(--color-primary);
-      color: white;
-      font-weight: 500;
-      
-      &:hover {
-        filter: brightness(0.9);
-        transform: translateY(-2px);
-      }
+    .address-content {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      background: #f8f9fa;
+      border-radius: 4px;
 
-      .material-icons {
-        color: white;
-      }
-    }
-  }
-
-  .map-button,
-  .contact-button {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 1.5rem;
-    background: #f8f9fa;
-    color: var(--color-primary);
-    text-decoration: none;
-    border-radius: 8px;
-    
-    &:hover {
-      background: var(--color-primary);
-      color: white;
-      
-      .material-icons {
-        color: white;
-      }
-    }
-  }
-
-  @media (max-width: 1600px) {
-    .main-content {
-      grid-template-columns: 60% 40%;
-      gap: 2rem;
-    }
-  }
-
-  @media (max-width: 1200px) {
-    padding: 1rem;
-    
-    .main-content {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .gallery {
-      .main-image {
-        width: 100%;
-        height: auto;
-        max-height: 70vh;
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.75rem;
-
-        img {
-          aspect-ratio: 4/3;
+      .address-icon {
+        .material-icons {
+          color: #007bff;
+          font-size: 24px;
         }
+      }
+
+      .address-text {
+        p {
+          margin: 0;
+          line-height: 1.5;
+          color: #333;
+
+          &:first-child {
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    .address-actions {
+      .map-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        padding: 12px;
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        justify-content: center;
+        font-weight: 500;
+
+        &:hover {
+          background: #0056b3;
+          transform: translateY(-1px);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .material-icons {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+
+  .contact-intro {
+    margin-bottom: 16px;
+    color: #666;
+  }
+
+  .contact-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+
+    .contact-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px;
+      background: #f8f9fa;
+      color: #333;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: #e9ecef;
+      }
+
+      &.reservation-button {
+        background: #28a745;
+        color: white;
+
+        &:hover {
+          background: #218838;
+        }
+      }
+
+      .material-icons {
+        font-size: 1.1rem;
       }
     }
   }
 
   @media (max-width: 768px) {
-    .gallery {
-      .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)) !important;
-        gap: 5px !important;
-        
-        img {
-          height: 50px !important;
-          width: 50px !important;
-          object-fit: cover;
-        }
-      }
+    .main-content .top-section {
+      grid-template-columns: 1fr;
     }
   }
 } 

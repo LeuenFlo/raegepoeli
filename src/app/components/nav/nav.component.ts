@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
         <div class="nav-links">
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Übersicht</a>
           <a routerLink="/kontakt" routerLinkActive="active">Kontakt & Preise</a>
+          <a routerLink="/galerie" routerLinkActive="active">Galerie</a>
         </div>
       </div>
     </nav>

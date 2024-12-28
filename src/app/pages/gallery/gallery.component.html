@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="gallery card">
+    <div class="gallery-grid">
+      <img *ngFor="let image of images" 
+           [src]="image" 
+           [alt]="'Chalet Ansicht'" 
+           (click)="changeMainImage(image)" 
+           [class.active]="mainImage === image">
+    </div>
+    <div class="main-image-container">
+      <img [src]="mainImage" 
+           alt="Chalet Hauptansicht" 
+           class="main-image"
+           *ngIf="mainImage">
+    </div>
+  </div>
+</div> 

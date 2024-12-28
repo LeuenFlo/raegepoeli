@@ -10,7 +10,18 @@
     </div>
     
     <div class="table-section">
+      <div *ngIf="isLoading" class="loading-indicator">
+        <span class="material-icons rotating">sync</span>
+        Reservierungen werden geladen...
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        <span class="material-icons">error</span>
+        {{ error }}
+      </div>
+
       <app-reservation-table 
+        *ngIf="!isLoading && !error"
         [reservations]="reservations">
       </app-reservation-table>
     </div>

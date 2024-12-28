@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, catchError } from 'rxjs';
 import { Reservation } from '../models/reservation.model';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Reservation } from '../models/reservation.model';
 })
 export class ReservationService {
   private readonly SHEET_ID = '10E31jYkhiKE_bjMnlxwVItd_X2Z6Fxs_uO6yhD_9Fxg';
-  private readonly SHEET_RANGE = 'A2:G1000';  // Von A2 bis G1000 für alle Daten
+  private readonly SHEET_RANGE = 'A2:G1000';
   private readonly API_KEY = 'AIzaSyBhiqVypmyLHYPmqZYtvdSvxEopcLZBdYU';
 
   constructor(private http: HttpClient) {}
@@ -21,14 +21,18 @@ export class ReservationService {
         if (!response.values) return [];
         
         return response.values.map((row: string[]) => ({
-          timestamp: row[0],
+          timestamp: this.parseGermanDateTime(row[0]),
           name: row[1],
           personen: parseInt(row[2]),
           von: row[3],
           bis: row[4],
-          checkout: row[5],
+          checkout: this.formatCheckoutTime(row[5]),
           telefon: row[6]
         }));
+      }),
+      catchError(error => {
+        console.error('Fehler beim Laden der Reservierungen:', error);
+        throw error;
       })
     );
   }
@@ -65,8 +69,36 @@ export class ReservationService {
   }
 
   private parseGermanDate(dateStr: string): Date {
-    // Konvertiert deutsches Datumsformat (DD.MM.YY) in Date-Objekt
-    const [day, month, year] = dateStr.split('.').map(num => parseInt(num));
-    return new Date(2000 + year, month - 1, day); // Jahr 20XX
+    try {
+      const [day, month, year] = dateStr.split('.').map(num => parseInt(num));
+      return new Date(year, month - 1, day);
+    } catch (error) {
+      console.error('Fehler beim Parsen des Datums:', dateStr, error);
+      return new Date();
+    }
+  }
+
+  private parseGermanDateTime(dateTimeStr: string): string {
+    try {
+      const [datePart, timePart] = dateTimeStr.split(' ');
+      const [day, month, year] = datePart.split('.').map(num => parseInt(num));
+      const [hours, minutes, seconds] = timePart.split(':').map(num => parseInt(num));
+      
+      const date = new Date(year, month - 1, day, hours, minutes, seconds);
+      return date.toISOString();
+    } catch (error) {
+      console.error('Fehler beim Parsen von Datum und Zeit:', dateTimeStr, error);
+      return new Date().toISOString();
+    }
+  }
+
+  private formatCheckoutTime(timeStr: string): string {
+    try {
+      const [hours, minutes] = timeStr.split(':');
+      return `${hours}:${minutes}`;
+    } catch (error) {
+      console.error('Fehler beim Formatieren der Checkout-Zeit:', timeStr, error);
+      return timeStr;
+    }
   }
 } 

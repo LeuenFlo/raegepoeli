@@ -1,13 +1,15 @@
+@import '../../../styles/variables';
+
 nav {
   background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow-sm;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 .nav-container {
-  max-width: 1600px;
+  max-width: $max-content-width;
   margin: 0 auto;
   padding: 1rem 2rem;
   display: flex;

@@ -2,13 +2,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import 'styles/variables';
 
 :root {
-  --color-primary: #1a73e8;
-  --color-text: #1a1a1a;
-  --color-text-light: #666;
-  --color-background: #f8f9fa;
-  --color-error: #d32f2f;
+  --color-primary: #{$color-primary};
+  --color-success: #{$color-success};
+  --color-text: #{$color-text};
+  --color-text-light: #{$color-text-light};
+  --color-background: #{$color-background};
+  --color-border: #{$color-border};
 }
 
 * {
