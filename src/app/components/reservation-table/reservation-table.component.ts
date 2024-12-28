@@ -21,4 +21,9 @@ export class ReservationTableComponent {
     'checkout',
     'telefon'
   ];
+
+  formatPhoneNumber(phone: string): string {
+    if (!phone) return '';
+    return phone.startsWith('00') ? '+' + phone.slice(2) : phone;
+  }
 } 

@@ -28,7 +28,7 @@
 
     <ng-container matColumnDef="telefon">
       <th mat-header-cell *matHeaderCellDef>Telefon</th>
-      <td mat-cell *matCellDef="let reservation">{{reservation.telefon}}</td>
+      <td mat-cell *matCellDef="let reservation">{{formatPhoneNumber(reservation.telefon)}}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -60,7 +60,7 @@
       </div>
       <div class="card-row">
         <span class="label">Telefon</span>
-        <span class="value">{{reservation.telefon}}</span>
+        <span class="value">{{formatPhoneNumber(reservation.telefon)}}</span>
       </div>
     </div>
   </div>
