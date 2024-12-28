@@ -45,22 +45,6 @@
       }
     }
 
-    &.current {
-      position: relative;
-      
-      &::after {
-        content: 'Aktuell';
-        position: absolute;
-        top: 0.75rem;
-        right: 0.75rem;
-        background: $color-primary;
-        color: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 12px;
-        font-size: 0.75rem;
-      }
-    }
-
     .card-header {
       padding: 1rem;
       border-bottom: 1px solid $color-border;
