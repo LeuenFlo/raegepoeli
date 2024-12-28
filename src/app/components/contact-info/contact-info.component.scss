@@ -30,6 +30,19 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
+
+    &.no-padding {
+      padding: 0;
+
+      h3 {
+        padding: 20px 20px 0;
+        margin-bottom: 0;
+      }
+
+      .form-container {
+        margin-top: 0;
+      }
+    }
   }
 
   .info-section {
