@@ -16,6 +16,19 @@ h2 {
     border-collapse: collapse;
     table-layout: fixed;
 
+    .name-with-color {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .color-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
     th {
       color: #666;
       font-weight: 500;
@@ -66,6 +79,19 @@ h2 {
       border-radius: 8px;
       padding: 1rem;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+      .name-with-color {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .color-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
 
       .card-row {
         display: flex;

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { Reservation } from '../../models/reservation.model';
+import { ColorService } from '../../services/color.service';
 
 @Component({
   selector: 'app-reservation-table',
@@ -21,6 +22,12 @@ export class ReservationTableComponent {
     'checkout',
     'telefon'
   ];
+
+  constructor(private colorService: ColorService) {}
+
+  getColorForName(name: string): { background: string; border: string } {
+    return this.colorService.getColorForName(name);
+  }
 
   formatPhoneNumber(phone: string): string {
     if (!phone) return '';

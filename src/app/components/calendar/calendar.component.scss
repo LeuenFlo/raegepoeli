@@ -107,11 +107,10 @@
         cursor: pointer;
         border: none;
         transition: transform 0.2s;
-        background-color: #3498db !important;
-        border-color: #2980b9 !important;
 
         &:hover {
           transform: translateY(-1px);
+          filter: brightness(0.95);
         }
 
         .fc-event-title {
@@ -207,13 +206,46 @@
           }
         }
 
+        .fc-view-harness {
+          min-height: unset !important;
+        }
+
+        .fc-daygrid-body {
+          min-height: unset !important;
+        }
+
         .fc-col-header-cell {
           padding: 0.5rem !important;
-          font-size: 0.85rem;
+          font-size: 0.75rem;
         }
 
         .fc-daygrid-day {
-          padding: 4px !important;
+          min-height: unset !important;
+          height: 2.5rem !important;
+        }
+
+        .fc-daygrid-day-frame {
+          min-height: unset !important;
+          height: 100% !important;
+        }
+
+        .fc-daygrid-day-events {
+          margin: 0 !important;
+          min-height: unset !important;
+          
+          .fc-event {
+            font-size: 0.7rem !important;
+            padding: 0 4px !important;
+            margin: 1px 0 !important;
+          }
+        }
+
+        .fc-daygrid-day-top {
+          padding: 2px !important;
+          
+          .fc-daygrid-day-number {
+            font-size: 0.75rem !important;
+          }
         }
       }
     }

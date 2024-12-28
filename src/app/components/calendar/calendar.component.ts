@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { Reservation } from '../../models/reservation.model';
+import { ColorService } from '../../services/color.service';
 
 @Component({
   selector: 'app-calendar',
@@ -12,10 +13,13 @@ import { Reservation } from '../../models/reservation.model';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss']
 })
-export class CalendarComponent implements OnChanges {
+export class CalendarComponent implements OnChanges, OnInit {
   @Input() reservations: Reservation[] = [];
   @Output() visibleDatesChange = new EventEmitter<{ start: Date; end: Date }>();
   currentMonthYear: string = '';
+  isMobile: boolean = false;
+
+  constructor(private colorService: ColorService) {}
 
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin],
@@ -26,10 +30,13 @@ export class CalendarComponent implements OnChanges {
       center: 'title',
       right: ''
     },
+    height: 'auto',
+    contentHeight: 'auto',
+    expandRows: true,
     events: [],
     eventContent: (arg: any) => {
       return {
-        html: arg.event.extendedProps.name
+        html: this.formatName(arg.event.extendedProps.name)
       };
     },
     datesSet: (dateInfo) => {
@@ -43,6 +50,34 @@ export class CalendarComponent implements OnChanges {
     }
   };
 
+  private formatName(name: string): string {
+    const parts = name.split(' ');
+    if (parts.length > 1) {
+      if (parts[0].toLowerCase() === 'familie') {
+        return name;
+      }
+      return `${parts[0][0]}. ${parts.slice(1).join(' ')}`;
+    }
+    return name;
+  }
+
+  ngOnInit() {
+    this.checkIfMobile();
+    window.addEventListener('resize', () => this.checkIfMobile());
+  }
+
+  private checkIfMobile() {
+    this.isMobile = window.innerWidth <= 768;
+    if (this.isMobile) {
+      this.calendarOptions = {
+        ...this.calendarOptions,
+        height: 'auto',
+        contentHeight: 'auto',
+        aspectRatio: 0.8
+      };
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['reservations']) {
       this.updateEvents();
@@ -53,6 +88,7 @@ export class CalendarComponent implements OnChanges {
     const events = this.reservations.map(reservation => {
       const startDate = this.parseGermanDate(reservation.von);
       const endDate = this.parseGermanDate(reservation.bis);
+      const colors = this.colorService.getColorForName(reservation.name);
       
       if (startDate.getTime() === endDate.getTime()) {
         endDate.setDate(endDate.getDate() + 1);
@@ -65,6 +101,8 @@ export class CalendarComponent implements OnChanges {
         start: startDate,
         end: endDate,
         allDay: true,
+        backgroundColor: colors.background,
+        borderColor: colors.border,
         extendedProps: {
           name: reservation.name
         }
