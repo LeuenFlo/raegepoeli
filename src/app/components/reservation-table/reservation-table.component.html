@@ -1,7 +1,8 @@
 <div class="table-container">
   <div class="reservation-cards">
     <div class="card" *ngFor="let reservation of reservations"
-         [id]="getReservationId(reservation.name)">
+         [id]="getReservationId(reservation.name)"
+         [class.current]="isCurrentReservation(reservation)">
       <div class="card-header">
         <div class="name-section">
           <div class="name-with-color">
