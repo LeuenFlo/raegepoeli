@@ -33,4 +33,30 @@ export class ReservationTableComponent {
     if (!phone) return '';
     return phone.startsWith('00') ? '+' + phone.slice(2) : phone;
   }
+
+  isCurrentReservation(reservation: Reservation): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const startDate = this.parseGermanDate(reservation.von);
+    const endDate = this.parseGermanDate(reservation.bis);
+    endDate.setHours(23, 59, 59);
+    
+    return today >= startDate && today <= endDate;
+  }
+
+  isPastReservation(reservation: Reservation): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const endDate = this.parseGermanDate(reservation.bis);
+    endDate.setHours(23, 59, 59);
+    
+    return endDate < today;
+  }
+
+  private parseGermanDate(dateStr: string): Date {
+    const [day, month, year] = dateStr.split('.').map(num => parseInt(num));
+    return new Date(year, month - 1, day);
+  }
 } 
