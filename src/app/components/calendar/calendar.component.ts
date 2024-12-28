@@ -27,7 +27,7 @@ export class CalendarComponent implements OnChanges, OnInit {
     initialView: 'dayGridMonth',
     locale: deLocale,
     headerToolbar: {
-      left: 'prev next today',
+      left: 'prev today next',
       center: 'title',
       right: ''
     },
