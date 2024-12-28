@@ -15,7 +15,6 @@ import { ContactInfoComponent } from '../../components/contact-info/contact-info
     .container {
       max-width: 1600px;
       margin: 0 auto;
-      padding: 0 2rem;
     }
   `]
 })

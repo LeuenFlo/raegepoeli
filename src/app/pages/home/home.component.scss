@@ -29,4 +29,15 @@
       width: 100%;
     }
   }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 1rem;
+  }
+
+  .content-grid {
+    gap: 1rem;
+    margin-top: 1rem;
+  }
 } 

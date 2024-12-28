@@ -19,4 +19,19 @@
   strong {
     color: var(--color-primary);
   }
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 1rem;
+    
+    h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
 } 

@@ -15,6 +15,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
 }
 
 body {
@@ -49,4 +54,24 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #ffebee;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .card {
+    padding: 1rem;
+    border-radius: 6px;
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  
+  .error-message {
+    padding: 1rem;
+    margin: 1rem;
+  }
 }
