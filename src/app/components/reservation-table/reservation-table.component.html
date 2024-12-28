@@ -1,8 +1,7 @@
 <div class="table-container">
   <div class="reservation-cards">
     <div class="card" *ngFor="let reservation of reservations"
-         [class.current]="isCurrentReservation(reservation)"
-         [class.past]="isPastReservation(reservation)">
+         [class.current]="isCurrentReservation(reservation)">
       <div class="card-header">
         <div class="name-section">
           <div class="name-with-color">
@@ -10,10 +9,6 @@
                  [style.border-color]="getColorForName(reservation.name).border"></div>
             <h3>{{ reservation.name }}</h3>
           </div>
-        </div>
-        <div class="persons">
-          <span class="material-icons">group</span>
-          <span>{{ reservation.personen }} Pers.</span>
         </div>
       </div>
       <div class="card-content">
@@ -44,6 +39,10 @@
           <a [href]="'tel:' + formatPhoneNumber(reservation.telefon)" class="phone-link">
             <span class="material-icons">phone</span>
             {{ formatPhoneNumber(reservation.telefon) }}
+          </a>
+          <a [href]="getWhatsAppLink(reservation)" target="_blank" class="whatsapp-link">
+            <span class="material-icons">chat</span>
+            WhatsApp
           </a>
         </div>
       </div>

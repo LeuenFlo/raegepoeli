@@ -16,16 +16,14 @@
     border-radius: 12px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: all 0.2s ease;
     border: 1px solid $color-border;
-
-    &:hover {
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transform: translateY(-2px);
-    }
+    opacity: 0.85;
 
     &.current {
       position: relative;
+      opacity: 1;
+      background: white;
+      border-color: $color-primary;
       
       &::after {
         content: 'Jetzt im Chalet';
@@ -41,16 +39,16 @@
         align-items: center;
         gap: 4px;
       }
-    }
 
-    &.past {
-      opacity: 0.7;
+      .card-header {
+        background: #f8f9fa;
+      }
     }
 
     .card-header {
       padding: 1rem;
       border-bottom: 1px solid $color-border;
-      background: #f8f9fa;
+      background: #f1f3f5;
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -150,27 +148,42 @@
 
       .contact {
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
         margin-top: 0.5rem;
+        width: 100%;
 
-        .phone-link {
+        .phone-link, .whatsapp-link {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          color: $color-primary;
+          gap: 5px;
           text-decoration: none;
-          padding: 0.5rem 1rem;
-          border-radius: 6px;
-          background: #f8f9fa;
+          padding: 0.35rem 0.7rem;
+          border-radius: 4px;
           transition: all 0.2s ease;
+          font-size: 0.85rem;
+          white-space: nowrap;
+
+          .material-icons {
+            font-size: 15px;
+          }
+        }
+
+        .phone-link {
+          color: $color-text;
+          background: #f1f3f5;
 
           &:hover {
             background: #e9ecef;
-            text-decoration: none;
           }
+        }
 
-          .material-icons {
-            font-size: 16px;
+        .whatsapp-link {
+          color: white;
+          background: #25D366;
+          opacity: 0.85;
+
+          &:hover {
+            opacity: 1;
           }
         }
       }

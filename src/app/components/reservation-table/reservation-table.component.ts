@@ -34,6 +34,12 @@ export class ReservationTableComponent {
     return phone.startsWith('00') ? '+' + phone.slice(2) : phone;
   }
 
+  getWhatsAppLink(reservation: Reservation): string {
+    const phoneNumber = this.formatPhoneNumber(reservation.telefon).replace(/\s+/g, '');
+    const message = `Hallo ${reservation.name}, `;
+    return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  }
+
   isCurrentReservation(reservation: Reservation): boolean {
     const today = new Date();
     today.setHours(0, 0, 0, 0);

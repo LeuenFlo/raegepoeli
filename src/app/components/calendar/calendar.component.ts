@@ -5,6 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { Reservation } from '../../models/reservation.model';
 import { ColorService } from '../../services/color.service';
+import deLocale from '@fullcalendar/core/locales/de';
 
 @Component({
   selector: 'app-calendar',
@@ -24,21 +25,29 @@ export class CalendarComponent implements OnChanges, OnInit {
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin],
     initialView: 'dayGridMonth',
-    locale: 'de',
+    locale: deLocale,
     headerToolbar: {
-      left: 'prev,next',
+      left: 'prev next today',
       center: 'title',
       right: ''
     },
     height: 'auto',
+    firstDay: 1,
+    buttonText: {
+      today: 'Heute'
+    },
     contentHeight: 'auto',
     expandRows: true,
     fixedWeekCount: false,
     showNonCurrentDates: false,
+    dayMaxEventRows: true,
+    dayMaxEvents: true,
+    eventDisplay: 'block',
     events: [],
     eventContent: (arg: any) => {
+      const isMobile = window.innerWidth <= 576;
       return {
-        html: this.formatName(arg.event.extendedProps.name)
+        html: isMobile ? this.formatNameMobile(arg.event.extendedProps.name) : this.formatName(arg.event.extendedProps.name)
       };
     },
     datesSet: (dateInfo) => {
@@ -59,6 +68,17 @@ export class CalendarComponent implements OnChanges, OnInit {
         return name;
       }
       return `${parts[0][0]}. ${parts.slice(1).join(' ')}`;
+    }
+    return name;
+  }
+
+  private formatNameMobile(name: string): string {
+    const parts = name.split(' ');
+    if (parts.length > 1) {
+      if (parts[0].toLowerCase() === 'familie') {
+        return `F. ${parts.slice(1).join(' ')}`;
+      }
+      return `${parts[0][0]}. ${parts[1][0]}.`;
     }
     return name;
   }
