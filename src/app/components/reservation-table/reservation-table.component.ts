@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { Reservation } from '../../models/reservation.model';
 import { ColorService } from '../../services/color.service';
@@ -7,12 +8,13 @@ import { ColorService } from '../../services/color.service';
 @Component({
   selector: 'app-reservation-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule],
+  imports: [CommonModule, FormsModule, MatTableModule],
   templateUrl: './reservation-table.component.html',
   styleUrls: ['./reservation-table.component.scss']
 })
 export class ReservationTableComponent {
   private _reservations: Reservation[] = [];
+  showContacts: boolean = false;
   
   @Input() 
   set reservations(value: Reservation[]) {
